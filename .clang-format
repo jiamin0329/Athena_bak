@@ -1,0 +1,93 @@
+###########################################################
+## This file is used to format source codes in the project.
+## Please do NOT modify this file.
+## ********************************************************
+## 2018-09-30 - Jiamin Xu - Version 1.0: Initial creation
+###########################################################
+
+###########################################################
+## General Options
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: Cpp11
+ColumnLimit: 120
+FixNamespaceComments: true
+ReflowComments: true
+SortIncludes: true
+SortUsingDeclarations: true
+MaxEmptyLinesToKeep: 1
+
+###########################################################
+## Indent Options
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+AccessModifierOffset: -4
+NamespaceIndentation: None
+IndentCaseLabels: false
+IndentWrappedFunctionNames: false
+
+###########################################################
+## Align Options
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignEscapedNewlines: Right
+AlignOperands: true
+AlignTrailingComments: true
+DerivePointerAlignment: true
+PointerAlignment: Left
+
+###########################################################
+## Function formats
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: true
+AlwaysBreakAfterDefinitionReturnType: All
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+BinPackArguments: false
+BinPackParameters: false
+
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+
+###########################################################
+## Break options
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: true
+BraceWrapping:   
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: false
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+BreakBeforeBraces: Custom
+
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializersBeforeComma: false
+BreakBeforeInheritanceComma: false
+BreakStringLiterals: true
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+#############################################################
+## Space options
+SpaceAfterCStyleCast: true
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
