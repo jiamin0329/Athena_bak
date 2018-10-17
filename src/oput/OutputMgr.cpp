@@ -12,7 +12,7 @@
  */
 /* Athena headers */
 #include "OutputMgr.hpp"
-#include "geom/AVector.hpp"
+#include "AVector.hpp"
 #include "mesh/IBlock.hpp"
 #include "mesh/IMesh.hpp"
 

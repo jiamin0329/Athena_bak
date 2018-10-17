@@ -14,6 +14,7 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/lib")
 
 ## add include directories
 include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${PROJECT_SOURCE_DIR}/src/math)
 
 ## set src file list
 set(OPUT_SRC 

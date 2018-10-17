@@ -15,6 +15,7 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/lib")
 ## add include directories
 include_directories(${PROJECT_SOURCE_DIR}/src)
 include_directories(${PROJECT_SOURCE_DIR}/src/geom)
+include_directories(${PROJECT_SOURCE_DIR}/src/math)
 
 ## add lib directory
 link_directories("${PROJECT_SOURCE_DIR}/lib")
