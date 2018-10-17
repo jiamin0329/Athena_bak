@@ -8,6 +8,7 @@
 ##    Date            Name                    Description of Change
 ##    20-Aug-2018     Jiamin Xu               Creation
 ##    22-Aug-2018     Jiamin Xu               Add geom
+##    17-Oct-2018     Jiamin Xu               Add math
 ##================================================================================
 
 ## set path to output executable file
@@ -22,9 +23,10 @@ include_directories(${PROJECT_SOURCE_DIR}/src/mesh)
 include_directories(${PROJECT_SOURCE_DIR}/src/comm)
 include_directories(${PROJECT_SOURCE_DIR}/src/proc)
 include_directories(${PROJECT_SOURCE_DIR}/src/oput)
+include_directories(${PROJECT_SOURCE_DIR}/src/math)
 
 ## compile executable file
 add_executable(ATHENA ${PROJECT_SOURCE_DIR}/src/main.cpp)
 
 ## set link directory
-target_link_libraries(ATHENA mesh comm proc oput geom ${Boost_LIBRARIES})
+target_link_libraries(ATHENA mesh comm proc oput geom math ${Boost_LIBRARIES})

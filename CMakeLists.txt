@@ -9,6 +9,7 @@
 ##    20-Aug-2018     Jiamin Xu               Creation
 ##    22-Aug-2018     Jiamin Xu               Add geom
 ##    27-Sep-2018     Jiamin Xu               Add -wall in debug mode
+##    17-Oct-2018     Jiamin Xu               Add math directory
 ##================================================================================
 
 ##================================================================================
@@ -67,4 +68,5 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/src/geom")
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/mesh")
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/proc")
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/oput")
+add_subdirectory("${PROJECT_SOURCE_DIR}/src/math")
 add_subdirectory("${PROJECT_SOURCE_DIR}/src")

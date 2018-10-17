@@ -2,7 +2,7 @@
 ## Copyright (c) 2018 Ultra-Aero, All Rights Reserved
 ##================================================================================
 ## File description:
-## Main CMake file for libgeom
+## Main CMake file for libmath
 ##
 ##================================================================================
 ##    Date            Name                    Description of Change
@@ -16,10 +16,10 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/lib")
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 ## set src file list
-set(GEOM_SRC 
-Point.cpp)
+set(MATH_SRC 
+AVector.cpp)
 
 ## produce libcomm
-add_library(geom SHARED ${GEOM_SRC})
-set_target_properties(geom PROPERTIES OUTPUT_NAME "geom")
-set_target_properties(geom PROPERTIES VERSION 1.0 SOVERSION 1.0)
+add_library(math SHARED ${MATH_SRC})
+set_target_properties(math PROPERTIES OUTPUT_NAME "math")
+set_target_properties(math PROPERTIES VERSION 1.0 SOVERSION 1.0)
