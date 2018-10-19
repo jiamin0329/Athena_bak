@@ -52,10 +52,8 @@ sh build.sh
 
 If you want to develop Athena, you need to install VSCode, see https://code.visualstudio.com/Download, then install C/C++ extension provided by Microsoft.
 
-
-
- ### 1.3 Project Structure
+### 1.3 Project Structure
 
 * .clang-format: clang-format is a strong tool to format your code automatically. Specific options should be defined in this file and then VSCode will use such options.
 
-
+## 2. Technology Roadmap
