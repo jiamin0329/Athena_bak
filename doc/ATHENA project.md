@@ -1,8 +1,8 @@
-ATHENA project
-==============
-
+# <center>ATHENA project</center>
 
 ## 0. Introduction
+
+**ATHENA** is a set of software kits well developed to deliver engineering/physical solutions in advanced aerospace vehicle design and other engineering fields. **ATHENA** is written in C/C++ and python to solve partial differential equations (PDEs) and PDE-constrained optimization problems with appropriate numerical methods on both structured and unstructured mesh. 
 
 ## 1. Get Started
 
@@ -41,12 +41,13 @@ ATHENA project
 
 Start to using Athena
 
-
-
-
-
-cd Athena
+```bash
+git clone https://github.com/jiamin0329/Athena.git user_defined_workdir/Athena
+cd user_defined_workdir/Athena
 sh build.sh
+```
+
+
 
 ### 1.2 Development Tools
 
