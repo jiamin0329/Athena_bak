@@ -14,10 +14,13 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/lib")
 
 ## add include directories
 include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${PROJECT_SOURCE_DIR}/src/mesh)
 
 ## set src file list
 set(GEOM_SRC 
-Point.cpp)
+Point.cpp 
+Face.cpp 
+ConnectivityProc.cpp)
 
 ## produce libcomm
 add_library(geom SHARED ${GEOM_SRC})
