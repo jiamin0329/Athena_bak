@@ -189,11 +189,11 @@ Mesh::Process()
                                     currBlk->AddCoordZ(val[index]);
                             }
                 }  // end loop all the coords
-                d_blockList.push_back(currBlk);
+                d_blockVec.push_back(currBlk);
             }  // end loop all the zones
 
             if (isDebug)
-                DEBUG(d_blockList.size());
+                DEBUG(d_blockVec.size());
         }  // end loop all the databases
     }
     return status;

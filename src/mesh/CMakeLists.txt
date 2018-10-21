@@ -7,6 +7,7 @@
 ##================================================================================
 ##    Date            Name                    Description of Change
 ##    20-Aug-2018     Jiamin Xu               Creation
+##    22-Oct-2018     Jiamin Xu               Add ConnectivityProc
 ##================================================================================
 
 ## set path to output library
@@ -23,7 +24,8 @@ link_directories("${PROJECT_SOURCE_DIR}/lib")
 ## set src file list
 set(MESH_SRC 
 Mesh.cpp 
-StrBlock.cpp)
+StrBlock.cpp 
+ConnectivityProc.cpp ) 
 
 ## produce libmesh
 add_library(mesh SHARED ${MESH_SRC})

@@ -7,6 +7,8 @@
 ##================================================================================
 ##    Date            Name                    Description of Change
 ##    22-Aug-2018     Jiamin Xu               Creation
+##    22-Oct-2018     Jiamin Xu               Move ConnectivityProc to mesh lib
+##                                            Add Volume.cpp
 ##================================================================================
 
 ## set path to output library
@@ -20,7 +22,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/mesh)
 set(GEOM_SRC 
 Point.cpp 
 Face.cpp 
-ConnectivityProc.cpp)
+Volume.cpp)
 
 ## produce libcomm
 add_library(geom SHARED ${GEOM_SRC})

@@ -58,16 +58,18 @@ public:
     virtual MeshType_t     GetMeshType() const     = 0;
     virtual MeshFileType_t GetMeshFileType() const = 0;
 
-    virtual string GetName() const    = 0;
-    virtual int    GetCellDim() const = 0;
-    virtual int    GetPhysDim() const = 0;
+    virtual string GetName() const = 0;
+
+    virtual int GetCellDim() const = 0;
+    virtual int GetPhysDim() const = 0;
 
     virtual int GetNumZones() const = 0;
 
     virtual IBlock *GetBlock(int index) const = 0;
 
-    virtual Status_t          Process()      = 0;
-    virtual vector<IBlock *> *GetBlockList() = 0;
+    virtual Status_t Process() = 0;
+
+    virtual vector<IBlock *> *GetBlockVector() = 0;
 
 protected:
     explicit IMesh(){};

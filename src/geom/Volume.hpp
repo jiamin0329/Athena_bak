@@ -3,15 +3,15 @@
  * Copyright (c) 2018 Ultra-Aero, All Rights Reserved
  *================================================================================
  * File description:
- * Athena point object
+ * Athena Volume object
  *
  *================================================================================
  *    Date            Name                    Description of Change
- *    17-Oct-2018     Jiamin Xu               Creation
+ *    22-Oct-2018     Jiamin Xu               Creation
  *================================================================================
  */
-#ifndef ATHENA_POINT_HPP
-#define ATHENA_POINT_HPP
+#ifndef ATHENA_VOLUME_HPP
+#define ATHENA_VOLUME_HPP
 
 /* Athena headers */
 
@@ -30,18 +30,20 @@
  */
 namespace ATHENA
 {
-class Point
+class Volume
 {
 public:
-    Point(double x, double y, double z);
-    Point(double x, double y);
-    Point();
-    ~Point();
+    typedef enum
+    {
+        VolumeType_none  = 0,
+        VolumeType_cubic = 1,
+    } VolumeType_t;
+
+    Volume();
+    ~Volume(){};
 
 private:
-    double d_x;
-    double d_y;
-    double d_z;
+    VolumeType_t d_type;
 };
 }  // namespace ATHENA
 

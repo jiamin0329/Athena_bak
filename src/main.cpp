@@ -109,8 +109,8 @@ main(int argc, char *argv[])
     ATHENA::IMesh *mesh = new ATHENA::Mesh(meshFile, bocoFile);
     mesh->Process();
 
-    vector<ATHENA::IBlock *> *blockList = mesh->GetBlockList();
-    for (auto blkIter : *blockList)
+    vector<ATHENA::IBlock *> *blockVec = mesh->GetBlockVector();
+    for (auto blkIter : *blockVec)
     {
         blkIter->GridTransformation();
     }

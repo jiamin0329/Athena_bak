@@ -59,6 +59,7 @@ public:
     virtual bool IsDimType2D() const { return d_dimType == BlockDimType_2D; };
     virtual bool IsDimType3D() const { return d_dimType == BlockDimType_3D; };
 
+    virtual int    GetBlockId() const { return d_id; };
     virtual string GetName() const { return d_name; };
     virtual int    GetIDim() const { return d_idimNode; };
     virtual int    GetJDim() const { return d_jdimNode; };
@@ -71,9 +72,13 @@ public:
     virtual AVector GetJSurfNormal(int index) const { return d_nj[index]; };
     virtual AVector GetKSurfNormal(int index) const { return d_nk[index]; };
 
+    virtual vector<IFace*>* GetFaceVector() const {return d_faceVec;};
+
 private:
     BlockDimType_t d_dimType;
-    string         d_name;
+
+    int    d_id;
+    string d_name;
 
     int d_numNodes;
     int d_numCells;
@@ -90,6 +95,11 @@ private:
     vector<AVector> d_ni;
     vector<AVector> d_nj;
     vector<AVector> d_nk;
+
+    double d_centroid[3];
+    double d_radius;
+
+    vector<IFace*>* d_faceVec;
 };
 }  // namespace ATHENA
 #endif

@@ -3,19 +3,20 @@
  * Copyright (c) 2018 Ultra-Aero, All Rights Reserved
  *================================================================================
  * File description:
- * Athena point object
+ * Athena face object
  *
  *================================================================================
  *    Date            Name                    Description of Change
  *    17-Oct-2018     Jiamin Xu               Creation
  *================================================================================
  */
-#ifndef ATHENA_POINT_HPP
-#define ATHENA_POINT_HPP
 
 /* Athena headers */
+#include "Face.hpp"
+#include "Point.hpp"
 
 /* c++ headers */
+#include <cmath>
 
 /*
  *================================================================================
@@ -30,19 +31,8 @@
  */
 namespace ATHENA
 {
-class Point
-{
-public:
-    Point(double x, double y, double z);
-    Point(double x, double y);
-    Point();
-    ~Point();
 
-private:
-    double d_x;
-    double d_y;
-    double d_z;
-};
+Face::Face(Point* pnt1, Point* pnt2, Point* pnt3, Point* pnt4) {}
+Face::Face() {}
+
 }  // namespace ATHENA
-
-#endif

@@ -17,6 +17,7 @@
 
 /* c++ headers */
 #include <string>
+#include <vector>
 
 using namespace std;
 /*
@@ -27,6 +28,7 @@ using namespace std;
 namespace ATHENA
 {
 class AVector;
+class IFace;
 }
 
 /*
@@ -48,6 +50,7 @@ class IBlock
 public:
     virtual ~IBlock(){};
 
+
     virtual void AddCoordX(double val) = 0;
     virtual void AddCoordY(double val) = 0;
     virtual void AddCoordZ(double val) = 0;
@@ -61,7 +64,8 @@ public:
     virtual bool IsDimType2D() const = 0;
     virtual bool IsDimType3D() const = 0;
 
-    virtual string GetName() const = 0;
+    virtual int    GetBlockId() const = 0;
+    virtual string GetName() const    = 0;
 
     virtual int GetIDim() const = 0;
     virtual int GetJDim() const = 0;
@@ -76,6 +80,8 @@ public:
     virtual AVector GetISurfNormal(int index) const = 0;
     virtual AVector GetJSurfNormal(int index) const = 0;
     virtual AVector GetKSurfNormal(int index) const = 0;
+
+    virtual vector<IFace*>* GetFaceVector() const = 0;
 
 protected:
     explicit IBlock(){};

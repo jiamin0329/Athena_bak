@@ -49,9 +49,9 @@ public:
     virtual int     GetCellDim() const { return d_cellDim; };
     virtual int     GetPhysDim() const { return d_physDim; };
     virtual int     GetNumZones() const { return d_numZones; };
-    virtual IBlock *GetBlock(int index) const { return d_blockList[index]; };
+    virtual IBlock *GetBlock(int index) const { return d_blockVec[index]; };
 
-    virtual vector<IBlock *> *GetBlockList() { return &d_blockList; };
+    virtual vector<IBlock *> *GetBlockVector() { return &d_blockVec; };
 
 private:
     string d_name;
@@ -65,7 +65,7 @@ private:
     string d_meshFile;
     string d_bocoFile;
 
-    vector<IBlock *> d_blockList;
+    vector<IBlock *> d_blockVec;
 };
 }  // namespace ATHENA
 

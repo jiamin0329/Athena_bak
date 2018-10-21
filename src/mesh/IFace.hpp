@@ -3,15 +3,15 @@
  * Copyright (c) 2018 Ultra-Aero, All Rights Reserved
  *================================================================================
  * File description:
- * Athena point object
+ * Athena Face interface object
  *
  *================================================================================
  *    Date            Name                    Description of Change
- *    17-Oct-2018     Jiamin Xu               Creation
+ *    22-Oct-2018     Jiamin Xu               Creation
  *================================================================================
  */
-#ifndef ATHENA_POINT_HPP
-#define ATHENA_POINT_HPP
+#ifndef ATHENA_IFACE_HPP
+#define ATHENA_IFACE_HPP
 
 /* Athena headers */
 
@@ -23,6 +23,7 @@
  *================================================================================
  */
 
+
 /*
  *================================================================================
  *    Class namespaces
@@ -30,18 +31,13 @@
  */
 namespace ATHENA
 {
-class Point
+class IFace
 {
 public:
-    Point(double x, double y, double z);
-    Point(double x, double y);
-    Point();
-    ~Point();
+    virtual ~IFace(){};
 
 private:
-    double d_x;
-    double d_y;
-    double d_z;
+    explicit IFace(){};
 };
 }  // namespace ATHENA
 
