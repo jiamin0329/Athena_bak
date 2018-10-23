@@ -47,7 +47,11 @@ cd user_defined_workdir/Athena
 sh build.sh
 ```
 
-
+### 1.2 Output Files
+* Flow field data
+* Force/Coefficient history
+* Residual history
+* Log file
 
 ### 1.2 Development Tools
 
