@@ -9,6 +9,8 @@
 ##    22-Aug-2018     Jiamin Xu               Creation
 ##    22-Oct-2018     Jiamin Xu               Move ConnectivityProc to mesh lib
 ##                                            Add Volume.cpp
+##    18-Nov-2018     Jiamin Xu               Add Curve.cpp/Surface.cpp
+##                                            Change Volume.cpp to Body.cpp
 ##================================================================================
 
 ## set path to output library
@@ -21,8 +23,9 @@ include_directories(${PROJECT_SOURCE_DIR}/src/mesh)
 ## set src file list
 set(GEOM_SRC 
 Point.cpp 
-Face.cpp 
-Volume.cpp)
+Curve.cpp
+Surface.cpp 
+Body.cpp)
 
 ## produce libcomm
 add_library(geom SHARED ${GEOM_SRC})
