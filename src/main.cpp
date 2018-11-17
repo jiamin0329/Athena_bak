@@ -12,6 +12,8 @@
  */
 /* Athena headers */
 #include "Athena.hpp"
+
+#include "ConnectivityProc.hpp"
 #include "IMesh.hpp"
 #include "IOutputMgr.hpp"
 #include "Logger.hpp"
@@ -56,7 +58,9 @@ main(int argc, char *argv[])
 {
     static bool isDebug = true;
 
+    // Print header to screen
     PrintAthenaHeader();
+    
     // Check the command line input.
     std::string userDefinedDir;
     if (argc < 2)
@@ -109,6 +113,14 @@ main(int argc, char *argv[])
     ATHENA::IMesh *mesh = new ATHENA::Mesh(meshFile, bocoFile);
     mesh->Process();
 
+    // Process block connectivity information
+    ATHENA::ConnectivityProc *connProc = new ATHENA::ConnectivityProc(mesh);
+    connProc->Initialize();
+    connProc->SearchConnectivity();
+    connProc->WriteBCInfo();
+    //*
+
+    // Grid Transformation
     vector<ATHENA::IBlock *> *blockVec = mesh->GetBlockVector();
     for (auto blkIter : *blockVec)
     {
