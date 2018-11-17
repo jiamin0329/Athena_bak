@@ -50,6 +50,15 @@ StrBlock::StrBlock(char *name, int idimNode, int jdimNode, int kdimNode)
 StrBlock::~StrBlock() {}
 
 void
+StrBlock::Initialize()
+{
+
+
+
+    
+}
+
+void
 StrBlock::GridTransformation()
 {
     double volume = 0.0;

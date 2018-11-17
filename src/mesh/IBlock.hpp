@@ -29,7 +29,7 @@ namespace ATHENA
 {
 class AVector;
 class IFace;
-}
+}  // namespace ATHENA
 
 /*
  *================================================================================
@@ -49,7 +49,6 @@ class IBlock
 {
 public:
     virtual ~IBlock(){};
-
 
     virtual void AddCoordX(double val) = 0;
     virtual void AddCoordY(double val) = 0;
@@ -82,6 +81,8 @@ public:
     virtual AVector GetKSurfNormal(int index) const = 0;
 
     virtual vector<IFace*>* GetFaceVector() const = 0;
+
+    virtual void Initialize() = 0;
 
 protected:
     explicit IBlock(){};

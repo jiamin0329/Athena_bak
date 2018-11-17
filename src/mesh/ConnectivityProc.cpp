@@ -14,8 +14,8 @@
 /* Athena headers */
 #include "ConnectivityProc.hpp"
 
-#include "IMesh.hpp"
 #include "IBlock.hpp"
+#include "IMesh.hpp"
 
 /* c++ headers */
 #include <fstream>
@@ -63,14 +63,14 @@ ConnectivityProc::ConnectivityProc(IMesh* mesh) : d_mesh(mesh)
 void
 ConnectivityProc::Initialize()
 {
-    d_numSplit   = 7;
-    d_maxLinks   = 50;   // could be deleted later
-    d_maxSubface = 100;  // could be deleted later
-
     // setup points/faces
     vector<IBlock*>* blockVec = d_mesh->GetBlockVector();
     for (auto iter = blockVec->begin(); iter != blockVec->end(); iter++)
     {
+        vector<IFace*>* faceVec = (*iter)->GetFaceVector();
+
+
+
     }
 }
 
@@ -78,9 +78,23 @@ void
 ConnectivityProc::SearchConnectivity()
 {
 
-    // Mark inner vertices
+    face->UpdateSeed();
 
-    // Create subfaces
+    for (auto iter = faceVec->begin(); iter != faceVec->end(); iter++)
+    {
+        while (!face->IsDone())
+        {
+            Vertice seed = (*iter)->GetSeed();
+            toVertice = FindConnectVertice(Vertice);
+            
+            Expand();
+
+            RegisterSubface();
+
+            (*iter)->Check();
+
+        };
+    }
 }
 
 void

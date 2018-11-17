@@ -3,32 +3,25 @@
  * Copyright (c) 2018 Ultra-Aero, All Rights Reserved
  *================================================================================
  * File description:
- * Athena connectivity proceoosr
+ * Athena Vertice object
  *
  *================================================================================
  *    Date            Name                    Description of Change
  *    17-Oct-2018     Jiamin Xu               Creation
  *================================================================================
  */
-#ifndef ATHENA_CONNECTIVITYPROC_HPP
-#define ATHENA_CONNECTIVITYPROC_HPP
 
 /* Athena headers */
-#include "IBlock.hpp"
+#include "Vertice.hpp"
 
 /* c++ headers */
-#include <vector>
+#include <cmath>
 
-using namespace std;
 /*
  *================================================================================
  *    Forward declarations
  *================================================================================
  */
-namespace ATHENA
-{
-class IMesh;
-}
 
 /*
  *================================================================================
@@ -37,22 +30,10 @@ class IMesh;
  */
 namespace ATHENA
 {
-class ConnectivityProc
-{
-public:
-    ConnectivityProc(IMesh* mesh);
-    ~ConnectivityProc(){};
 
-    void Initialize();
-    void SearchConnectivity();
-    void WriteBCInfo();
+Vertice::Vertice() : d_x(0.0), d_y(0.0), d_z(0.0) {}
+Vertice::Vertice(double x, double y, double z) : d_x(x), d_y(y), d_z(z) {}
+Vertice::Vertice(double x, double y) : d_x(x), d_y(y), d_z(0.0) {}
+Vertice::~Vertice() {}
 
-private:
-    IMesh* d_mesh;
-
-    bool   d_isInitialized;
-    double d_limitDist;
-};
 }  // namespace ATHENA
-
-#endif

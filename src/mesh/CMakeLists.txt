@@ -23,6 +23,7 @@ link_directories("${PROJECT_SOURCE_DIR}/lib")
 
 ## set src file list
 set(MESH_SRC 
+Vertice.hpp 
 Mesh.cpp 
 StrBlock.cpp 
 ConnectivityProc.cpp ) 

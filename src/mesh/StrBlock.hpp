@@ -74,6 +74,8 @@ public:
 
     virtual vector<IFace*>* GetFaceVector() const {return d_faceVec;};
 
+    virtual void Initialize();
+
 private:
     BlockDimType_t d_dimType;
 
