@@ -8,6 +8,7 @@
 ##    Date            Name                    Description of Change
 ##    20-Aug-2018     Jiamin Xu               Creation
 ##    22-Oct-2018     Jiamin Xu               Add ConnectivityProc
+##    07-Apr-2019     Jiamin Xu               Add zone object related files
 ##================================================================================
 
 ## set path to output library
@@ -23,10 +24,12 @@ link_directories("${PROJECT_SOURCE_DIR}/lib")
 
 ## set src file list
 set(MESH_SRC 
-Vertice.hpp 
+Vertice.cpp 
 Mesh.cpp 
 StrBlock.cpp 
-ConnectivityProc.cpp ) 
+ConnectivityProc.cpp 
+Zone.cpp 
+ZoneUns.cpp) 
 
 ## produce libmesh
 add_library(mesh SHARED ${MESH_SRC})
