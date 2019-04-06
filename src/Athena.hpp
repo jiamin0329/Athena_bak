@@ -8,6 +8,7 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
+ *    07-Apr-2019     Jiamin Xu               Add NULL_USE
  *================================================================================
  */
 #ifndef ATHENA_HPP
@@ -62,3 +63,17 @@ typedef enum
     }
 
 #endif
+
+/*****************************************************************************
+ * A null use of a variable, use to avoid GNU compiler
+ * warnings about unused variables.
+ ****************************************************************************/
+#define NULL_USE(variable)                                                                                             \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if (0)                                                                                                         \
+        {                                                                                                              \
+            char *temp = (char *) &variable;                                                                           \
+            ++temp;                                                                                                    \
+        }                                                                                                              \
+    } while (0)

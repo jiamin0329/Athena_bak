@@ -8,6 +8,7 @@
 ##    Date            Name                    Description of Change
 ##    20-Aug-2018     Jiamin Xu               Creation
 ##    28-Sep-2018     Jiamin Xu               Remove external include/link directory
+##    07-Apr-2019     Jiamin Xu               Add AthenaMPI
 ##================================================================================
 
 ## set path to output library
@@ -20,7 +21,8 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 set(COMM_SRC 
 OptionMgr.cpp 
 Logger.cpp 
-Option.cpp)
+Option.cpp 
+AthenaMPI.cpp)
 
 ## produce libcomm
 add_library(comm SHARED ${COMM_SRC})

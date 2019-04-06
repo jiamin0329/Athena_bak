@@ -78,23 +78,6 @@ void
 ConnectivityProc::SearchConnectivity()
 {
 
-    face->UpdateSeed();
-
-    for (auto iter = faceVec->begin(); iter != faceVec->end(); iter++)
-    {
-        while (!face->IsDone())
-        {
-            Vertice seed = (*iter)->GetSeed();
-            toVertice = FindConnectVertice(Vertice);
-            
-            Expand();
-
-            RegisterSubface();
-
-            (*iter)->Check();
-
-        };
-    }
 }
 
 void

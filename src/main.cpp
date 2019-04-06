@@ -8,11 +8,13 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
+ *    07-Apr-2019     Jiamin Xu               Add AthenaMPI
  *================================================================================
  */
 /* Athena headers */
 #include "Athena.hpp"
 
+#include "AthenaMPI.hpp"
 #include "ConnectivityProc.hpp"
 #include "IMesh.hpp"
 #include "IOutputMgr.hpp"
@@ -37,6 +39,8 @@ using namespace std;
  *    Forward declarations
  *================================================================================
  */
+static bool isDebug = true;
+
 namespace
 {
 void
@@ -56,11 +60,19 @@ PrintAthenaHeader()
 int
 main(int argc, char *argv[])
 {
-    static bool isDebug = true;
+    ATHENA::AthenaMPI::Init(&argc, &argv);
+    ATHENA::AthenaMPI *mpiMgr = new ATHENA::AthenaMPI(0);
+
+    if (isDebug)
+    {
+        DEBUG(mpiMgr->GetRank())
+        DEBUG(mpiMgr->GetSize())
+    }
 
     // Print header to screen
-    PrintAthenaHeader();
-    
+    if (mpiMgr->IsMasterRank())
+        PrintAthenaHeader();
+
     // Check the command line input.
     std::string userDefinedDir;
     if (argc < 2)
@@ -130,5 +142,6 @@ main(int argc, char *argv[])
     ATHENA::IOutputMgr *outputMgr = new ATHENA::OutputMgr();
     outputMgr->OutputDomain(mesh);
 
+    ATHENA::AthenaMPI::Finalize();
     return 0;
 }

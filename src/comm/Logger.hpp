@@ -8,6 +8,7 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
+ *    07-Apr-2019     Jiamin Xu               Add macros
  *================================================================================
  */
 #ifndef ATHENA_LOGGER_HPP
@@ -16,6 +17,8 @@
 /* Athena headers */
 
 /* c++ headers */
+#include <iostream>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -40,7 +43,8 @@ public:
         SeverityType_info    = 0,
         SeverityType_warning = 1,
         SeverityType_error   = 2,
-        SeverityType_fatal   = 3
+        SeverityType_fatal   = 3,
+        SeverityType_debug   = 4
     } SeverityType_t;
 
     static Logger *GetLogger();
@@ -57,5 +61,45 @@ private:
     string         d_outputDir;    // dir
 };
 }  // namespace ATHENA
+
+#define ATHENA_DEBUG(X)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(ATHENA::Logger::SeverityType_debug, athenaos.str());                          \
+    } while (0)
+
+#define ATHENA_INFO(X)                                                                                                 \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(ATHENA::Logger::SeverityType_info, athenaos.str());                           \
+    } while (0)
+
+#define ATHENA_WARNING(X)                                                                                              \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(ATHENA::Logger::SeverityType_warning, athenaos.str());                        \
+    } while (0)
+
+#define ATHENA_ERROR(X)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(ATHENA::Logger::SeverityType_error, athenaos.str());                          \
+    } while (0)
+
+#define ATHENA_FATAL(X)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(ATHENA::Logger::SeverityType_fatal, athenaos.str());                          \
+    } while (0)
 
 #endif
