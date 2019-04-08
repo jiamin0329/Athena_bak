@@ -8,6 +8,7 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    07-Apr-2019     Jiamin Xu               Creation
+ *    08-Apr-2019     Jiamin Xu               Refactor AthenaMPI
  *================================================================================
  */
 #ifndef ATHENA_AthenaMPI_HPP
@@ -19,17 +20,14 @@
 #ifdef ATHENA_HAVE_MPI
 #include "mpi.h"
 #else
-/*!
- *  @brief Enumeration to define MPI constants when compiling without MPI.
- *
- *  These are defined in the global namespace because that's where MPI
- *  defines them. It does not matter what values these take because
- *  they are not used.  (They are just place holders to let code
- *  compile without MPI without requiring excessive preprocessor guards
- *  in the code.)
- *  This is not a complete set.  Developers should add as needed to extend
- *  AthenaMPI's functionality.
- */
+// Enumeration to define MPI constants when compiling without MPI.
+// These are defined in the global namespace because that's where MPI
+// defines them. It does not matter what values these take because
+// they are not used.  (They are just place holders to let code
+// compile without MPI without requiring excessive preprocessor guards
+// in the code.)
+// This is not a complete set. Developers should add as needed to extend
+// AthenaMPI's functionality.
 enum
 {
     MPI_COMM_WORLD,
@@ -82,34 +80,14 @@ enum
  */
 namespace ATHENA
 {
-/*!
- *  @brief Provides C++ wrapper around MPI routines.
- *
- *  AthenaMPI provides a single point of access in ATHENA for using MPI
- *  function calls and for the run-time decision whether to use MPI.
- *  The purpose of having a single point is to facilitate writing code
- *  that is not cluttered by the repetitive logic absorbed into this class.
- *  Codes accessing MPI through this class should work whether ATHENA is
- *  configured with or without MPI and whether MPI is enabled at run time.
- *
- *  If ATHENA has MPI enabled, the MPI wrappers in this class delegate to
- *  the real MPI methods. Otherwise, they are no-ops and will throw an
- *  assertion if used, except for those specifically identified as able to
- *  work without MPI enabled.  The purpose of these interfaces are strictly
- *  to check whether MPI was configured into ATHENA and ATHENA is using
- *  MPI at run time.  They are not "single-process implementations" of the
- *  MPI standard.
- */
+// Provides C++ wrapper around MPI routines.
 class AthenaMPI
 {
 public:
-    /*!
-     *  @brief Aliases for MPI data type names.
-     *
-     *  Define aliases for MPI types that can be used whether ATHENA is
-     *  configured with or without MPI.  Without MPI, these types are "dummies",
-     *  used to allow the code to be compiled without changes.
-     */
+    // Aliases for MPI data type names.
+    // Define aliases for MPI types that can be used whether ATHENA is
+    // configured with or without MPI.  Without MPI, these types are "dummies",
+    // used to allow the code to be compiled without changes.
 #ifdef ATHENA_HAVE_MPI
     typedef MPI_Comm     Comm;
     typedef MPI_Datatype Datatype;
@@ -124,12 +102,9 @@ public:
     typedef int Op;
     typedef int Request;
 
-    /*!
-     *  @brief Dummy definition of Status to match the MPI standard.
-     *
-     *  Codes are allowed to access the members of this struct, so they must
-     *  exist for compilation.  Without MPI, we won't actually use them.
-     */
+    // Dummy definition of Status to match the MPI standard.
+    // Codes are allowed to access the members of this struct, so they must
+    // exist for compilation. Without MPI, we won't actually use them.
     struct Status
     {
         Status();
@@ -139,146 +114,25 @@ public:
     };
 #endif
 
-    /*!
-     *  @brief Get the primary AthenaMPI object owned by ATHENA.
-     *
-     *  This is ATHENA's primary communication object set up when
-     *  AthenaMPI is initialized. It is used for basic communications
-     *  that are not associated with another communication object.
-     *  Various parts of the ATHENA library may create and use (and
-     *  destroy) communicators that are derived from this object.
-     *
-     *  The use of this object outside of the ATHENA library should be
-     *  carefully limited to avoid mixing messages.
-     *
-     *  After AthenaMPI::Init() and before AthenaMPI::Finalize(), the
-     *  object returned is useable. Otherwise it is intentionally
-     *  invalid.
-     *
-     *  @see Init()
-     */
     static const AthenaMPI& GetAthenaWorld() { return d_athenaWorld; }
 
-    /*!
-     *  @brief Get a static invalid rank number.
-     *
-     *  This value is intended to be used by other classes as an invalid rank
-     *  number rather than using a hard-coded "magic" negative integer value.
-     */
+    // This value is intended to be used by other classes as an invalid rank
+    // number rather than using a hard-coded "magic" negative integer value.
     static int GetInvalidRank() { return d_invalidRank; }
 
-    /*!
-     *  @brief Constructor.
-     *
-     *  The given MPI communicator will be used for all communications invoked
-     *  by this object.
-     *
-     *  Note that the object will NOT automatically free the communicator.
-     *  To manually free the communicator, use freeCommunicator().
-     *
-     *  If the specified communicator is MPI_COMM_NULL, the rank (see getRank())
-     *  and size (see getSize()) are set to invalid values.  Otherwise, the
-     *  rank and size are set using the given communicator.  If MPI is enabled
-     *  but MPI has not been initialized, the rank and size are set to invalid
-     *  values. If MPI is not enabled, the rank is set to 0 and size to 1.
-     */
+    // The given MPI communicator will be used for all communications invoked
+    // by this object.
+    // Note that the object will NOT automatically free the communicator.
+    // To manually free the communicator, use freeCommunicator().
+    // If the specified communicator is MPI_COMM_NULL, the rank (see getRank())
+    // and size (see getSize()) are set to invalid values. Otherwise, the
+    // rank and size are set using the given communicator. If MPI is enabled
+    // but MPI has not been initialized, the rank and size are set to invalid
+    // values. If MPI is not enabled, the rank is set to 0 and size to 1.
     explicit AthenaMPI(const Comm& comm);
 
-    /*!
-     *  @brief Copy constructor.
-     */
     AthenaMPI(const AthenaMPI& other);
 
-    /*!
-     *  @brief Get the local process rank from the last time the
-     *  internal communicator was set.
-     */
-    int GetRank() const { return d_rank; }
-
-    /*!
-     *  @brief Get the size (number of processes) of the internal
-     *  communicator the last time it was set.
-     */
-    int GetSize() const { return d_size; }
-
-    bool IsMasterRank() const {return d_rank == MASTER_NODE;}
-
-    /*!
-     *  @brief Get the internal communicator.
-     */
-    const Comm& GetCommunicator() const { return d_comm; }
-
-    /*!
-     *  @brief Set the internal communicator.
-     *
-     *  Note that this call does does automatically free the
-     *  existing communicator.  To manually free communicators, see
-     *  freeCommunicator().
-     *
-     *  @param[in] comm
-     */
-    void SetCommunicator(const Comm& comm);
-
-    /*!
-     *  @brief Duplicate and internally use the communicator of a given
-     *  AthenaMPI object.
-     *
-     *  Note that this call does not automatically free the
-     *  existing communicator. The duplicate communicator will also NOT
-     *  be automatically freed. To manually free communicators, see
-     *  FreeCommunicator().
-     *
-     *  If ATHENA isn't configured with MPI, the duplicate is an
-     *  identical copy.
-     */
-    void DupCommunicator(const AthenaMPI& other);
-
-    /*!
-     *  @brief Free the internal communicator and set it to MPI_COMM_NULL.
-     *
-     *  If the internal communicator is already MPI_COMM_NULL, do nothing.
-     */
-    void FreeCommunicator();
-
-    /*!
-     *  @brief Compare with another AthenaMPI's communicator.
-     *
-     *  If MPI is enabled, compare using Comm_compare, and return the result.
-     *  Otherwise, return MPI_IDENT if the two communicators are the same
-     *  and MPI_CONGRUENT if they are not.  (No other choice makes sense
-     *  when MPI is disabled.)
-     *
-     *  Performance of this method depends on underlying MPI implementation
-     *  and may not scale.
-     */
-    int CompareCommunicator(const AthenaMPI& other) const;
-
-    /*!
-     *  @brief Whether the communicator is MPI_COMM_NULL.
-     */
-    bool HasNullCommunicator() const { return d_comm == MPI_COMM_NULL; }
-
-    /*!
-     *  @brief Whether the communicator is congruent with another's.
-     *
-     *  Performance of this method depends on underlying MPI implementation
-     *  and may not scale.
-     */
-    bool IsCongruentWith(const AthenaMPI& other) const
-    {
-#ifdef ATHENA_HAVE_MPI
-        int compareResult = CompareCommunicator(other);
-        return compareRresult == MPI_CONGRUENT || compareResult == MPI_IDENT;
-
-#else
-        return d_comm != MPI_COMM_NULL && d_comm == other.d_comm;
-
-#endif
-    }
-
-    /*!
-     *  @brief Assignment operator.
-     */
     AthenaMPI& operator=(const AthenaMPI& rhs)
     {
         d_comm = rhs.d_comm;
@@ -297,8 +151,27 @@ public:
      */
     bool operator!=(const AthenaMPI& rhs) const { return d_comm != rhs.d_comm; }
 
-    //@{
-    //!  @name Static MPI wrappers matching MPI interfaces.
+    int GetRank() const { return d_rank; }
+    int GetSize() const { return d_size; }
+
+    bool        IsMasterRank() const { return d_rank == MASTER_NODE; }
+    const Comm& GetCommunicator() const { return d_comm; }
+    void        SetCommunicator(const Comm& comm);
+    void        DupCommunicator(const AthenaMPI& other);
+    void        FreeCommunicator();
+    int         CompareCommunicator(const AthenaMPI& other) const;
+    bool        HasNullCommunicator() const { return d_comm == MPI_COMM_NULL; }
+
+    bool IsCongruentWith(const AthenaMPI& other) const
+    {
+#ifdef ATHENA_HAVE_MPI
+        int compareResult = CompareCommunicator(other);
+        return compareRresult == MPI_CONGRUENT || compareResult == MPI_IDENT;
+#else
+        return d_comm != MPI_COMM_NULL && d_comm == other.d_comm;
+#endif
+    }
+
     static int Comm_rank(Comm comm, int* rank);
     static int Comm_size(Comm comm, int* size);
     static int Comm_compare(Comm comm1, Comm comm2, int* result);
@@ -314,10 +187,7 @@ public:
     static int
                   Waitsome(int incount, Request* array_of_requests, int* outcount, int* array_of_indices, Status* array_of_statuses);
     static double Wtime();
-    //@}
 
-    //@{
-    //!  @name MPI wrappers for methods associated with an MPI communicator.
     int
          Allgather(void* sendbuf, int sendcount, Datatype sendtype, void* recvbuf, int recvcount, Datatype recvtype) const;
     int  Allgatherv(void*    sendbuf,
@@ -495,8 +365,7 @@ private:
         int i;
     }; /**< @brief Structs for passing arguments to MPI. */
 
-    AthenaMPI(); /**< @brief Unimplemented default constructor. */
-
+    AthenaMPI(); // Unimplemented default constructor.
     AthenaMPI::Comm d_comm; /**< @brief Internal communicator. */
     int             d_rank; /**< @brief The local rank. */
     int             d_size; /**< @brief The size of the communicator. */
@@ -506,8 +375,7 @@ private:
     static bool d_weStartedMpi;     /**< @brief Whether this class started up MPI. */
     static AthenaMPI d_athenaWorld; /**< @brief Primary AthenaMPI object. */
     static bool d_callAbortInSerialInsteadOfExit; /**< @brief Flags to control program abort in AthenaMPI::abort(). */
-    static bool
-        d_callAbortInParallelInsteadOfMpiAbort; /**< @brief Flags to control program abort in AthenaMPI::abort(). */
+    static bool d_callAbortInParallelInsteadOfMpiAbort;  // Flags to control program abort in AthenaMPI::abort().
 
 };  // end class AthenaMPI
 }  // end namespace ATHENA
