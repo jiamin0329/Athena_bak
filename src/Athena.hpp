@@ -55,14 +55,12 @@ typedef enum
 /*****************************************************************************
  * Output debug info into console screen
  ****************************************************************************/
-#define DEBUG(arg...)                                                                                                  \
+#define ATHENA_DEBUG(arg...)                                                                                           \
     {                                                                                                                  \
         printf("[ATHENA DEBUG]:%s:%s:%d: ", __FILE__, __FUNCTION__, __LINE__);                                         \
         std::cout << arg << std::endl;                                                                                 \
         fflush(stdout);                                                                                                \
     }
-
-#endif
 
 /*****************************************************************************
  * A null use of a variable, use to avoid GNU compiler
@@ -77,3 +75,5 @@ typedef enum
             ++temp;                                                                                                    \
         }                                                                                                              \
     } while (0)
+
+#endif

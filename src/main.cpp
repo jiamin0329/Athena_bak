@@ -61,16 +61,16 @@ int
 main(int argc, char *argv[])
 {
     ATHENA::AthenaMPI::Init(&argc, &argv);
-    ATHENA::AthenaMPI *mpiMgr = new ATHENA::AthenaMPI(0);
+    const ATHENA::AthenaMPI mpiMgr = ATHENA::AthenaMPI::GetAthenaWorld();
 
     if (isDebug)
     {
-        DEBUG(mpiMgr->GetRank())
-        DEBUG(mpiMgr->GetSize())
+        ATHENA_DEBUG(mpiMgr.GetRank());
+        ATHENA_DEBUG(mpiMgr.GetSize());
     }
 
     // Print header to screen
-    if (mpiMgr->IsMasterRank())
+    if (mpiMgr.IsMasterRank())
         PrintAthenaHeader();
 
     // Check the command line input.
@@ -99,7 +99,7 @@ main(int argc, char *argv[])
     if (isDebug)
     {
         boost::filesystem::path currPath = boost::filesystem::current_path();
-        DEBUG(currPath);
+        ATHENA_DEBUG(currPath);
     }
 
     // Setup logger
@@ -125,23 +125,24 @@ main(int argc, char *argv[])
     ATHENA::IMesh *mesh = new ATHENA::Mesh(meshFile, bocoFile);
     mesh->Process();
 
-    // Process block connectivity information
-    ATHENA::ConnectivityProc *connProc = new ATHENA::ConnectivityProc(mesh);
-    connProc->Initialize();
-    connProc->SearchConnectivity();
-    connProc->WriteBCInfo();
-    //*
+    //// Process block connectivity information
+    // ATHENA::ConnectivityProc *connProc = new ATHENA::ConnectivityProc(mesh);
+    // connProc->Initialize();
+    // connProc->SearchConnectivity();
+    // connProc->WriteBCInfo();
+    ////*
 
-    // Grid Transformation
-    vector<ATHENA::IBlock *> *blockVec = mesh->GetBlockVector();
-    for (auto blkIter : *blockVec)
-    {
-        blkIter->GridTransformation();
-    }
+    //// Grid Transformation
+    // vector<ATHENA::IBlock *> *blockVec = mesh->GetBlockVector();
+    // for (auto blkIter : *blockVec)
+    //{
+    //    blkIter->GridTransformation();
+    //}
 
-    ATHENA::IOutputMgr *outputMgr = new ATHENA::OutputMgr();
-    outputMgr->OutputDomain(mesh);
+    // ATHENA::IOutputMgr *outputMgr = new ATHENA::OutputMgr();
+    // outputMgr->OutputDomain(mesh);
 
+    logger->ShutdownLogger();
     ATHENA::AthenaMPI::Finalize();
     return 0;
 }

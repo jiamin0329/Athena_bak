@@ -70,8 +70,8 @@ OutputMgr::OutputDomain(IMesh *mesh) const
     int    physDim   = mesh->GetPhysDim();
     string baseName  = mesh->GetName();
 
-    DEBUG(cellDim);
-    DEBUG(physDim);
+    ATHENA_DEBUG(cellDim);
+    ATHENA_DEBUG(physDim);
     // Write database info into cgns file
     cg_base_write(iFile, baseName.c_str(), cellDim, physDim, &iDataBase);
 
@@ -151,7 +151,7 @@ OutputMgr::OutputDomain(IMesh *mesh) const
         delete[] valy;
         delete[] valz;
 
-        DEBUG("start === output geom info")
+        ATHENA_DEBUG("start === output geom info")
         char solname[33];
         int  iFlow, iField;
 
@@ -211,10 +211,10 @@ OutputMgr::OutputDomain(IMesh *mesh) const
 
         delete[] nix, niy;
         delete[] volume;
-        DEBUG("end === output geom info")
+        ATHENA_DEBUG("end === output geom info")
     }
 
-    DEBUG("successed!");
+    ATHENA_DEBUG("successed!");
     /* close CGNS file */
     cg_close(iFile);
 }
