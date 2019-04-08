@@ -8,6 +8,7 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
+ *    08-Apr-2019     Jiamin Xu               Refine Log()
  *================================================================================
  */
 
@@ -19,7 +20,6 @@
 #include <string>
 
 /* External headers */
-#include <glog/logging.h>
 
 /*
  *================================================================================
@@ -34,9 +34,11 @@
  */
 namespace ATHENA
 {
-Logger *Logger::d_instance(nullptr);
+static bool isDebug = true;
 
-Logger *
+Logger* Logger::d_instance(nullptr);
+
+Logger*
 Logger::GetLogger()
 {
     if (!d_instance)
@@ -53,8 +55,13 @@ Logger::~Logger() {}
 void
 Logger::StartupLogger(string workingDir, string filename)
 {
-    FLAGS_log_dir = workingDir + "/";
-    google::InitGoogleLogging(filename.c_str());
+    FLAGS_log_dir                   = workingDir + "/";
+    FLAGS_log_prefix                = false;  // include the time and thread id
+    FLAGS_logbufsecs                = 0;      // flush log to file frequency
+    FLAGS_stop_logging_if_full_disk = true;   // if log is full stop write log
+    FLAGS_colorlogtostderr          = true;
+
+    google::InitGoogleLogging("Athena");
     LOG(INFO) << "Log file started!";
 }
 
@@ -65,20 +72,29 @@ Logger::ShutdownLogger()
 }
 
 void
-Logger::Log(SeverityType_t severityType, string text)
+Logger::Log(string filename, string function, int line, SeverityType_t severityType, string text)
 {
+    std::ostringstream output;
+    output << "[" << filename.c_str() << ":" << function.c_str() << ":Line" << line << "] " << text.c_str()
+           << std::ends;
+
     switch (severityType)
     {
     case SeverityType_info:
-        LOG(INFO) << text;
+        LOG(INFO) << output.str().c_str();
+        break;
     case SeverityType_warning:
-        LOG(WARNING) << text;
+        LOG(WARNING) << output.str().c_str();
+        break;
     case SeverityType_error:
-        LOG(ERROR) << text;
+        LOG(ERROR) << output.str().c_str();
+        break;
     case SeverityType_fatal:
-        LOG(FATAL) << text;
+        LOG(FATAL) << output.str().c_str();
+        break;
     default:
-        LOG(INFO) << text;
+        LOG(INFO) << output.str().c_str();
+        break;
     }
 }
 
