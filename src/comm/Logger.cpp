@@ -9,6 +9,7 @@
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
  *    08-Apr-2019     Jiamin Xu               Refine Log()
+ *    08-Apr-2019     Jiamin Xu               Set FLAGS_alsologtostderr
  *================================================================================
  */
 
@@ -60,6 +61,8 @@ Logger::StartupLogger(string workingDir, string filename)
     FLAGS_logbufsecs                = 0;      // flush log to file frequency
     FLAGS_stop_logging_if_full_disk = true;   // if log is full stop write log
     FLAGS_colorlogtostderr          = true;
+    if (isDebug)
+        FLAGS_alsologtostderr = true;
 
     google::InitGoogleLogging("Athena");
     LOG(INFO) << "Log file started!";

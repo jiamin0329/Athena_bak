@@ -61,16 +61,11 @@ int
 main(int argc, char *argv[])
 {
     ATHENA::AthenaMPI::Init(&argc, &argv);
-    const ATHENA::AthenaMPI mpiMgr = ATHENA::AthenaMPI::GetAthenaWorld();
-
-    if (isDebug)
-    {
-        ATHENA_DEBUG(mpiMgr.GetRank());
-        ATHENA_DEBUG(mpiMgr.GetSize());
-    }
+    const ATHENA::AthenaMPI  mpiMgrObj = ATHENA::AthenaMPI::GetAthenaWorld();
+    const ATHENA::AthenaMPI *mpiMgr    = &mpiMgrObj;
 
     // Print header to screen
-    if (mpiMgr.IsMasterRank())
+    if (mpiMgr->IsMasterRank())
         PrintAthenaHeader();
 
     // Check the command line input.
@@ -108,6 +103,11 @@ main(int argc, char *argv[])
     ATHENA::Logger *logger = ATHENA::Logger::GetLogger();
     logger->StartupLogger("./", ATHENA_LOG_FILE);
 
+    if (ATHENA::AthenaMPI::UsingMPI())
+        ATHENA_INFO("MPI is initialized!");
+    else
+        ATHENA_INFO("MPI is not impelemented!");
+
     // Setup option manager
     ATHENA::OptionMgr *optMgr = ATHENA::OptionMgr::GetOptionMgr();
     optMgr->Initialize();
@@ -141,6 +141,9 @@ main(int argc, char *argv[])
 
     // ATHENA::IOutputMgr *outputMgr = new ATHENA::OutputMgr();
     // outputMgr->OutputDomain(mesh);
+
+    delete optMgr;
+    delete mesh;
 
     logger->ShutdownLogger();
     ATHENA::AthenaMPI::Finalize();
