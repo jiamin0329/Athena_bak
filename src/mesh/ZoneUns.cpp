@@ -14,6 +14,7 @@
 /* Athena headers */
 #include "ZoneUns.hpp"
 
+#include "comm/Logger.hpp"
 /* c++ headers */
 
 /* External headers */

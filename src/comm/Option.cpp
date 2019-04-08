@@ -14,6 +14,7 @@
 /* Athena headers */
 #include "Option.hpp"
 
+#include "Logger.hpp"
 /* c++ headers */
 
 using namespace ATHENA;

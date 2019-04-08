@@ -10,6 +10,7 @@
  *    28-Jul-2018     Jiamin Xu               Creation
  *    07-Apr-2019     Jiamin Xu               Add macros
  *    08-Apr-2019     Jiamin Xu               Update macros
+ *    08-Apr-2019     Jiamin Xu               Add ATHENA_DEBUG
  *================================================================================
  */
 #ifndef ATHENA_LOGGER_HPP
@@ -32,6 +33,15 @@ using namespace std;
  *    Forward declarations
  *================================================================================
  */
+#define ATHENA_DEBUG(X)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::ostringstream athenaos;                                                                                   \
+        athenaos << X << std::ends;                                                                                    \
+        ATHENA::Logger::GetLogger()->Log(                                                                              \
+            __FILE__, __FUNCTION__, __LINE__, ATHENA::Logger::SeverityType_debug, athenaos.str());                     \
+    } while (0)
+
 #define ATHENA_INFO(X)                                                                                                 \
     do                                                                                                                 \
     {                                                                                                                  \
@@ -67,8 +77,6 @@ using namespace std;
         ATHENA::Logger::GetLogger()->Log(                                                                              \
             __FILE__, __FUNCTION__, __LINE__, ATHENA::Logger::SeverityType_fatal, athenaos.str());                     \
     } while (0)
-
-#endif
 /*
  *================================================================================
  *    Class namespaces
@@ -102,3 +110,4 @@ private:
     string         d_outputDir;    // dir
 };
 }  // namespace ATHENA
+#endif

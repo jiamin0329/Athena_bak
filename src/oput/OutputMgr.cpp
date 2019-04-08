@@ -15,6 +15,7 @@
 #include "AVector.hpp"
 #include "mesh/IBlock.hpp"
 #include "mesh/IMesh.hpp"
+#include "comm/Logger.hpp"
 
 /* c++ headers */
 #include <sstream>
@@ -151,7 +152,7 @@ OutputMgr::OutputDomain(IMesh *mesh) const
         delete[] valy;
         delete[] valz;
 
-        ATHENA_DEBUG("start === output geom info")
+        ATHENA_DEBUG("start === output geom info");
         char solname[33];
         int  iFlow, iField;
 
@@ -211,7 +212,7 @@ OutputMgr::OutputDomain(IMesh *mesh) const
 
         delete[] nix, niy;
         delete[] volume;
-        ATHENA_DEBUG("end === output geom info")
+        ATHENA_DEBUG("end === output geom info");
     }
 
     ATHENA_DEBUG("successed!");

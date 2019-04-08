@@ -53,16 +53,6 @@ typedef enum
 #define DEG_TO_RAD(deg) deg *PI / 180.0
 
 /*****************************************************************************
- * Output debug info into console screen
- ****************************************************************************/
-#define ATHENA_DEBUG(arg...)                                                                                           \
-    {                                                                                                                  \
-        printf("[ATHENA DEBUG]:%s:%s:%d: ", __FILE__, __FUNCTION__, __LINE__);                                         \
-        std::cout << arg << std::endl;                                                                                 \
-        fflush(stdout);                                                                                                \
-    }
-
-/*****************************************************************************
  * A null use of a variable, use to avoid GNU compiler
  * warnings about unused variables.
  ****************************************************************************/
@@ -76,4 +66,5 @@ typedef enum
         }                                                                                                              \
     } while (0)
 
+// end of athena.hpp
 #endif

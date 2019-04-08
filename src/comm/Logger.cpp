@@ -83,6 +83,9 @@ Logger::Log(string filename, string function, int line, SeverityType_t severityT
 
     switch (severityType)
     {
+    case SeverityType_debug:
+        LOG(INFO) << output.str().c_str();
+        break;
     case SeverityType_info:
         LOG(INFO) << output.str().c_str();
         break;

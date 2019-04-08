@@ -13,6 +13,8 @@
 /* Athena headers */
 #include "OptionMgr.hpp"
 
+#include "Logger.hpp"
+
 /* c++ headers */
 #include <cstddef>
 #include <stdio.h>
