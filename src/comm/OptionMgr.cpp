@@ -58,7 +58,7 @@ OptionMgr::ReadOptionFile()
     Status_t    status  = Status_OK;
 
     if (isDebug)
-        DEBUG(ATHENA_CONTROL_FILE);
+        ATHENA_DEBUG(ATHENA_CONTROL_FILE);
 
     boost::property_tree::ptree pt, section;
     read_ini(ATHENA_CONTROL_FILE, pt);
@@ -67,7 +67,7 @@ OptionMgr::ReadOptionFile()
     for (boost::property_tree::ptree::iterator iter = pt.begin(); iter != pt.end(); iter++)
     {
         if (isDebug)
-            DEBUG(iter->first);
+            ATHENA_DEBUG(iter->first);
 
         section = iter->second;
         // loop the current section
@@ -104,13 +104,13 @@ OptionMgr::ReadOptionFile()
     {
         for (vector<Option *>::iterator iter = d_optionSet.begin(); iter != d_optionSet.end(); iter++)
         {
-            DEBUG((*iter)->GetOptionName());
+            ATHENA_DEBUG((*iter)->GetOptionName());
             if ((*iter)->GetType() == OptionType_double)
-                DEBUG((dynamic_cast<DoubleOption *>(*iter))->GetValue());
+                ATHENA_DEBUG((dynamic_cast<DoubleOption *>(*iter))->GetValue());
             if ((*iter)->GetType() == OptionType_string)
-                DEBUG((dynamic_cast<StringOption *>(*iter))->GetValue());
+                ATHENA_DEBUG((dynamic_cast<StringOption *>(*iter))->GetValue());
             if ((*iter)->GetType() == OptionType_int)
-                DEBUG((dynamic_cast<IntOption *>(*iter))->GetValue());
+                ATHENA_DEBUG((dynamic_cast<IntOption *>(*iter))->GetValue());
         }
     }
 

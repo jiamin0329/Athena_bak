@@ -42,10 +42,10 @@ ZoneUns::ZoneUns(char*             zoneName,
       d_numCells(numCells),
       d_numBoundaryVerts(numBoundaryVerts)
 {
-    DEBUG(d_numVertices);
-    DEBUG(d_numCells);
-    DEBUG(d_numBoundaryVerts);
-    DEBUG(d_numCoords);
+    ATHENA_DEBUG(d_numVertices);
+    ATHENA_DEBUG(d_numCells);
+    ATHENA_DEBUG(d_numBoundaryVerts);
+    ATHENA_DEBUG(d_numCoords);
 
     for (int iVert = 0; iVert < d_numVertices; ++iVert)
     {

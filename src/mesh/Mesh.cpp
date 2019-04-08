@@ -107,9 +107,9 @@ Mesh::Process()
 
             if (isDebug)
             {
-                DEBUG(baseName);
-                DEBUG(cellDim);
-                DEBUG(physDim);
+                ATHENA_DEBUG(baseName);
+                ATHENA_DEBUG(cellDim);
+                ATHENA_DEBUG(physDim);
             }
 
             int numZones;
@@ -194,7 +194,7 @@ Mesh::Process()
             }  // end loop all the zones
 
             if (isDebug)
-                DEBUG(d_blockVec.size());
+                ATHENA_DEBUG(d_blockVec.size());
         }  // end loop all the databases
     }
     return status;

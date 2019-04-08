@@ -127,15 +127,16 @@ Option::Option(string optName, int optionIndex) : d_optionName(optName), d_optIn
 void
 Option::CreateOptionSet(vector<Option *> &optionSet)
 {
-    static bool isDebug = true;
-    int         i       = 0;
+    static bool isDebug = false;
+
+    int i = 0;
     while (optionTable[i].optionIndex != ATHENA_OPTION_INDEX_END)
     {
         Option *option = optionTable[i].creatorCallback(optionTable[i].optionIndex);
         optionSet.push_back(option);
         i++;
         if (isDebug)
-            DEBUG(option->GetOptionName());
+            ATHENA_DEBUG(option->GetOptionName());
     }
 }
 
