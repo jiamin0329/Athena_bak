@@ -8,6 +8,7 @@
  *================================================================================
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
+ *    09-Apr-2019     Jiamin Xu               Add more macro definitions
  *================================================================================
  */
 #ifndef ATHENA_IMESH_HPP
@@ -26,6 +27,25 @@ using namespace std;
  *    Forward declarations
  *================================================================================
  */
+#define VTK_TYPE_VERTEX 1        // VTK nomenclature for defining a vertex element.
+#define VTK_TYPE_LINE 3          // VTK nomenclature for defining a line element.
+#define VTK_TYPE_TRIANGLE 5      // VTK nomenclature for defining a triangle element.
+#define VTK_TYPE_RECTANGLE 9     // VTK nomenclature for defining a rectangle element.
+#define VTK_TYPE_TETRAHEDRON 10  // VTK nomenclature for defining a tetrahedron element.
+#define VTK_TYPE_HEXAHEDRON 12   // VTK nomenclature for defining a hexahedron element.
+#define VTK_TYPE_PRISM 13        // VTK nomenclature for defining a prism element.
+#define VTK_TYPE_PYRAMID 14      // VTK nomenclature for defining a pyramid element.
+
+#define NUM_ELEM_TYPES 7
+
+#define NUM_VERTICES_LINE 2
+#define NUM_VERTICES_TRIANGLE 3
+#define NUM_VERTICES_QUADRILATERAL 4
+#define NUM_VERTICES_TETRAHEDRON 4
+#define NUM_VERTICES_HEXAHEDRON 8
+#define NUM_VERTICES_PYRAMID 5
+#define NUM_VERTICES_PRISM 6
+
 namespace ATHENA
 {
 class IBlock;
@@ -50,6 +70,8 @@ typedef enum
     MeshFileType_cgns  = 1,
     meshFileType_plt3d = 2
 } MeshFileType_t;
+
+
 
 class IMesh
 {
