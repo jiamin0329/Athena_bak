@@ -9,6 +9,7 @@
  *    Date            Name                    Description of Change
  *    28-Jul-2018     Jiamin Xu               Creation
  *    07-Apr-2019     Jiamin Xu               Add NULL_USE
+ *    09-Apr-2019     Jiamin Xu               Add definitions for axis orientation
  *================================================================================
  */
 #ifndef ATHENA_HPP
@@ -51,6 +52,13 @@ typedef enum
  ****************************************************************************/
 #define PI 3.1415926535897932
 #define DEG_TO_RAD(deg) deg *PI / 180.0
+
+/*****************************************************************************
+ * Definitions for axis orientation
+ ****************************************************************************/
+#define X_AXIS 0  // X axis orientation.
+#define Y_AXIS 1  // Y axis orientation.
+#define Z_AXIS 2  // Z axis orientation.
 
 /*****************************************************************************
  * A null use of a variable, use to avoid GNU compiler
